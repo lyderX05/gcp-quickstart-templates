@@ -1,0 +1,10 @@
+imports:
+- path: 1_gcp_vm.jinja
+
+resources:
+- name: 'gcptest-dm'
+  type: 1_gcp_vm.jinja
+  properties:
+    vm_id: 'gcptest'
+    image_id: 'projects/debian-cloud/global/images/family/debian-9'
+    zone: 'us-central1-a'

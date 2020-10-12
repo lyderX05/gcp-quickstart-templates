@@ -1,0 +1,30 @@
+resources:
+- name: "{{ properties['vm_id'] }}-vm"
+  type: 'compute.v1.instance'
+  properties:
+    description: 'A VM instance Properties'
+    tags:
+      items:
+      - demo
+      - cloud-manager
+    zone: "{{ properties['zone'] }}"
+    machineType: "zones/{{ properties['zone'] }}/machineTypes/n1-standard-1"
+    disks:
+    - type: PERSISTENT
+      mode: READ_WRITE
+      deviceName: main-drive
+      boot: true
+      initializeParams:
+        diskName: "{{ properties['vm_id'] }}-vm-disk"
+        sourceImage: "{{ properties['image_id'] }}"
+        diskSizeGb: 10
+        diskType: "zones/{{ properties['zone'] }}/diskTypes/pd-standard"
+        autoDelete: true
+    labels:
+      name: vm-instance
+      count: 1
+    networkInterfaces:
+    - network: 'global/networks/default'
+      accessConfigs:
+        type: ONE_TO_ONE_NAT
+        name: External NAT
