@@ -1,0 +1,22 @@
+resources:
+- name: ubuntu-vm
+  type: compute.v1.instance
+  properties:
+    zone: us-central1-a
+    machineType: zones/us-central1-a/machineTypes/n1-standard-1
+    disks:
+    - deviceName: boot
+      type: PERSISTENT
+      boot: true
+      autoDelete: true
+      initializeParams:
+        sourceImage: projects/ubuntu-os-cloud/global/images/ubuntu-1804-bionic-v20200923
+    networkInterfaces: $(ref.ubuntu-network)
+  metadata:
+    dependsOn:
+      - ubuntu-network
+- name: ubuntu-network
+  type: compute.v1.network
+  properties:
+    routingConfig:
+        routingMode: GLOBAL

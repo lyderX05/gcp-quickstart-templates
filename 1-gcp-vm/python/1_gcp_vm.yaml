@@ -1,0 +1,11 @@
+imports:
+- path: 1_gcp_vm.py
+
+resources:
+- name: gcp-vm
+  type: 1_gcp_vm.py
+  properties:
+    vm_id: 'gcptest'
+    image_id: 'projects/debian-cloud/global/images/family/debian-9'
+    zone: 'us-central1-a'
+        

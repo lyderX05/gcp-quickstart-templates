@@ -1,0 +1,3 @@
+Ubuntu:
+    Bionic: projects/ubuntu-os-cloud/global/images/ubuntu-1804-bionic-v20200923
+    Xenial: projects/ubuntu-os-cloud/global/images/ubuntu-1604-xenial-v20200923
