@@ -1,0 +1,9 @@
+imports:
+  - path: 2_gcp_vpc.py
+
+resources:
+  - name: gcp-vpc
+    type: 2_gcp_vpc.py
+    properties:
+      vpc_id: 'vpctest'
+      region: 'us-central1'
