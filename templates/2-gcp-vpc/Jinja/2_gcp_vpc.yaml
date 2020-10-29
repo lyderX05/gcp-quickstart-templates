@@ -1,0 +1,9 @@
+imports:
+- path: 2_gcp_vpc.jinja
+
+resources:
+- name: gcp-vpc
+  type: 2_gcp_vpc.jinja
+  properties:
+    vpc_id: 'vpctest'
+    region: 'us-central1'

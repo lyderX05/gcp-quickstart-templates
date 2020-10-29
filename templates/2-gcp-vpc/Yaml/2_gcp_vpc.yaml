@@ -1,0 +1,35 @@
+resources:
+  - name: "demo-vpc"
+    type: 'compute.v1.network'
+    properties:
+      description: 'A GCP VPC Network generated from templates'
+      autoCreateSubnetworks: false
+      subnetworks:
+        - "regions/us-central1/subnetworks/demo-subnetwork-1"
+        - "regions/us-central1/subnetworks/demo-subnetwork-2"
+      routingConfig:
+        routingMode: REGIONAL
+
+  - name: "demo-subnetwork-1"
+    type: 'compute.v1.subnetwork'
+    properties:
+      description: 'A GCP VPC Subnetwork generated from templates'
+      region: "us-central1"
+      network: "global/networks/demo-vpc"
+      ipCidrRange: "10.10.0.0/20"
+      privateIpGoogleAccess: True
+    metadata:
+      dependsOn:
+        - "demo-vpc"
+
+  - name: "demo-subnetwork-2"
+    type: 'compute.v1.subnetwork'
+    properties:
+      description: 'A GCP VPC Subnetwork generated from templates'
+      region: "us-central1"
+      network: "global/networks/demo-vpc"
+      ipCidrRange: "10.30.0.0/20"
+      privateIpGoogleAccess: True
+    metadata:
+      dependsOn:
+        - "demo-vpc"

@@ -1,0 +1,35 @@
+resources:
+- name: "{{ properties['vpc_id'] }}-vpc"
+  type: 'compute.v1.network'
+  properties:
+    description: 'A GCP VPC Network generated from templates'
+    autoCreateSubnetworks: false
+    subnetworks:
+      - "regions/{{ properties['region'] }}/subnetworks/{{ properties['vpc_id'] }}-subnetwork-1"
+      - "regions/{{ properties['region'] }}/subnetworks/{{ properties['vpc_id'] }}-subnetwork-2"
+    routingConfig:
+        routingMode: REGIONAL
+
+- name: "{{ properties['vpc_id'] }}-subnetwork-1"
+  type: 'compute.v1.subnetwork'
+  properties:
+    description: 'A GCP VPC Subnetwork generated from templates'
+    region: "{{ properties['region'] }}"
+    network: "global/networks/{{ properties['vpc_id'] }}-vpc"
+    ipCidrRange: "10.10.0.0/20"
+    privateIpGoogleAccess: True
+  metadata:
+    dependsOn:
+      - "{{ properties['vpc_id'] }}-vpc"
+
+- name: "{{ properties['vpc_id'] }}-subnetwork-2"
+  type: 'compute.v1.subnetwork'
+  properties:
+    description: 'A GCP VPC Subnetwork generated from templates'
+    region: "{{ properties['region'] }}"
+    network: "global/networks/{{ properties['vpc_id'] }}-vpc"
+    ipCidrRange: "10.30.0.0/20"
+    privateIpGoogleAccess: True
+  metadata:
+    dependsOn:
+      - "{{ properties['vpc_id'] }}-vpc"
